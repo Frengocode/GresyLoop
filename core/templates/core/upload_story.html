@@ -1,0 +1,12 @@
+<head>
+    <title>Upload Story</title>
+</head>
+<body>
+    <h2>Upload Story</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>

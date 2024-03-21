@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for profile in profiles %}
+    <div class="user_profile">
+        {% if profile.profile_image %}
+            <img src="{{ profile.profile_image.url }}" width="65" alt="">
+
+        {% else %}
+            <img src="https://cobaltsettlements.com/wp-content/uploads/2019/03/blank-profile.jpg"  alt="">
+        {% endif %}
+
+        <form action="{% url "add_friend" profile.id %}">
+            {% csrf_token %}
+            <button type="submit">Subscribe</button>
+        </form>
+    
+
+    {% endfor %}
+    
+</body>
+</html>
+
+<style>
+ 
+        .user_profile img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user_profile h1 {
+            font-size: 16px;
+            margin: 0;
+        }
+</style>

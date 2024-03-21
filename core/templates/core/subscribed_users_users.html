@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribed Users Content</title>
+</head>
+<body>
+    <h1>Subscribed Users Content</h1>
+    {% for item in content %}
+        <div>
+            <h2>{{ item.user_profile}}</h2>
+            <img src="{{ item.profile_image.url }}" alt="Content">
+            <p>{{ item.content_title }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>

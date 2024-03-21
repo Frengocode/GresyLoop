@@ -1,0 +1,39 @@
+<!-- template.html -->
+<style>
+    /* Стили для формы */
+    .delete-post-form {
+        max-width: 350px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #dbdbdb;
+        border-radius: 5px;
+    }
+
+    /* Стили для кнопки */
+    .delete-post-form button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ed4956; /* Красный цвет, похожий на Instagram */
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .delete-post-form button[type="submit"]:hover {
+        background-color: #bf0a18; /* Темнее красный цвет при наведении */
+    }
+    h1{
+        color: #ed4956;
+        text-align: center;
+        margin-top: 200px;
+    }
+</style>
+
+<h1>Форма для удаление публикации</h1>
+<form action="{% url 'delete_uploud_contents' %}" method="post" class="delete-post-form">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Delete</button>
+</form>

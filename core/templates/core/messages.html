@@ -1,0 +1,10 @@
+<h1>All Messages</h1>
+<ul>
+{% for message in all_messages %}
+    {% if message.sender == user %}
+        <li>To: {{ message.receiver.username }}, Text: {{ message.text }}</li>
+    {% else %}
+        <li>From: {{ message.sender.username }}, Text: {{ message.text }}</li>
+    {% endif %}
+{% endfor %}
+</ul>

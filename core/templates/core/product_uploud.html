@@ -1,0 +1,53 @@
+<form action="" enctype="multipart/form-data" method="post" class="profile-photo-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_profile_photo">Profile Photo:</label>
+        {{ form }}
+    </div>
+    <button type="submit" class="btn btn-primary btn-upload">Upload</button>
+</form>
+
+<style>
+       body{
+        background: url(https://images.alphacoders.com/102/thumb-1920-1026345.jpg);
+
+    }
+    .profile-photo-form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-group input[type="file"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .btn-upload {
+        background-color: #0095f6;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-upload:hover {
+        background-color: #007bb5;
+    }
+</style>

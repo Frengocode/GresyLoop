@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Общие стили */
+        body {
+            font-family: Arial, sans-serif;
+            background: url(https://images.alphacoders.com/102/thumb-1920-1026345.jpg);
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-header {
+            text-align: center;
+            padding: 20px;
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .posts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .post {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .user_profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .user_profile img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user_profile h1 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .content h3 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .like-button {
+            display: flex;
+            align-items: center;
+        }
+
+        .like-button button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+            color: #888888;
+            font-size: 24px; /* Увеличиваем размер иконки сердечка */
+        }
+
+        .like-button button:hover {
+            color: #ff0000;
+        }
+
+        .comment_icon {
+            width: 25px;
+            height: 25px;
+            background-color: #3d5aec;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .comment_icon i {
+            color: white;
+            font-size: 14px;
+        }
+
+        .bottom-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000000;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .menu-item {
+            text-align: center;
+            flex: 1;
+            text-decoration: none;
+            color: #888;
+        }
+
+        .menu-item:hover {
+            color: #333;
+        }
+
+        .menu-item i {
+            font-size: 20px;
+        }
+
+        .menu-item span {
+            display: block;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="top-header">
+    <h1>Gresyloop</h1>
+</header>
+
+<!-- Лента публикаций -->
+<div class="posts-container">
+    {% for uploud_contetn in content %}
+    <div class="post">
+        <div class="user_profile">
+            {% if uploud_contetn.user_profile.profile_image %}
+                <img src="{{ uploud_contetn.user_profile.profile_image.url }}" width="65" alt="">
+            {% else %}
+                <img src="https://cobaltsettlements.com/wp-content/uploads/2019/03/blank-profile.jpg"  alt="">
+            {% endif %}
+            <h1>{{ uploud_contetn.user_profile }}</h1> {% if uploud_contetn.user_profile.meta_active.metas %} <img src="https://th.bing.com/th/id/OIP.0ZCxgJ8f8AbLAWh6Tl2CWwAAAA?rs=1&pid=ImgDetMain" width="10" alt="">{% endif %}
+        </div>
+        <div class="content">
+            <img src="{{ uploud_contetn.content.url }}" width="345" alt="">
+            <h3>{{ uploud_contetn.content_title }}</h3>
+        </div>
+        <h3> Создано  {{ uploud_contetn.created_at }}</h3>
+        <div class="like-button">
+            <form action="{% url "like_button" uploud_contetn.id %}">
+                {% csrf_token %}
+                {{ uploud_contetn.likes.count }}
+                <button id="heartButton" class="heart"><i class="far fa-heart"></i></button> <!-- Используем иконку сердечка из Font Awesome -->
+                <div class="comment_icon">
+                    <a href="{% url "commnetrion" uploud_contetn.id %}"><i  class="fas fa-comment"></i></a>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<nav class="bottom-menu">
+    <a href="{% url "seacrh" %}" class="menu-item">
+        <i class="fa fa-search"></i>
+        <span>Search</span>
+    </a>
+    <a href="{% url "content" %}" class="menu-item">
+        <i class="fa fa-plus"></i>
+        <span>Add</span>
+    </a>
+    <a href="{% url "profile" %}" class="menu-item">
+        <i class="fa fa-user"></i>
+        <span>Profile</span>
+    </a>
+</nav>
+
+</body>
+</html>
+
+
+<style>
+   .user_profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .user_profile img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user_profile h1 {
+            font-size: 16px;
+            margin: 0;
+        }
+</style>

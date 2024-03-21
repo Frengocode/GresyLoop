@@ -1,0 +1,38 @@
+<style>
+    /* Стили для формы */
+    .delete-comment-form {
+        max-width: 350px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #dbdbdb;
+        border-radius: 5px;
+    }
+
+    /* Стили для кнопки */
+    .delete-comment-form button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ed4956; /* Красный цвет, похожий на Instagram */
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .delete-comment-form button[type="submit"]:hover {
+        background-color: #bf0a18; /* Темнее красный цвет при наведении */
+    }
+    h1{
+        color: #bf0a18;
+        margin-top: 200px;
+        text-align: center;
+    }
+</style>
+
+<h1>Delete Comment</h1>
+<form action="{% url 'delete_comment' %}" method="post" class="delete-comment-form">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Delete</button>
+</form>

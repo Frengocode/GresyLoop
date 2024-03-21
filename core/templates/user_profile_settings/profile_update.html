@@ -1,0 +1,62 @@
+<style>
+    /* Стили для формы */
+    .username-change-form {
+        max-width: 350px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #dbdbdb;
+        border-radius: 5px;
+    }
+
+    /* Стили для полей ввода */
+    .username-change-form input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #dbdbdb;
+        border-radius: 5px;
+        background-color: #fafafa;
+    }
+
+    /* Стили для меток */
+    .username-change-form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #fafafa;
+    }
+
+    /* Стили для кнопки */
+    .username-change-form button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #3897f0;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .username-change-form button[type="submit"]:hover {
+        background-color: #1e88e5;
+    }
+    h1{
+        text-align: center;
+        color: #fafafa;
+        margin-top: 200px;
+    }
+    body{
+        background: url(https://images.alphacoders.com/102/thumb-1920-1026345.jpg);
+    }
+</style>
+
+<h1>Форма для изменения имяпользователя</h1>
+<form method="post" class="username-change-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.username.id_for_label }}">New Username</label>
+        {{ form.username }}
+    </div>
+    <button type="submit">Change</button>
+</form>

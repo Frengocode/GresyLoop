@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+
+    
+
+<header class="top-header">
+    <h1>Публикация</h1>
+  </header>
+    
+</body>
+</html>
+
+<div class="user_profile">
+    <img src="{{ content.user_profile.profile_image.url }}" width="100" alt=""> <h1>{{ content.user_profile }}</h1>
+</div>
+
+<img src="{{ content.content.url }}" width="300" alt="">
+    <h3>{{ content.content_title }}</h3>
+        <h3>{{ content.created_at }}</h3>
+<form method="post" action="{% url "like_button" content.id  %}" >
+    {% csrf_token %}
+        {{ content.likes.count }}
+            <button  id="heartButton" class="heart">Like</button>
+                </form>
+                <h1></h1>
+                    <a href="{% url "commnetrion" content.id %}">Комментария ----- <i class="fa-solid fa-comments"></i></a>
+                        <nav class="bottom-menu">
+                                <a href="{% url "home" %}" class="menu-item">
+                                    <i class="fa fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        <a href="{% url "seacrh" %}" class="menu-item">
+                    <i class="fa fa-search"></i>
+                <span>Search</span>
+            </a>
+        <a href="{% url "content" %}" class="menu-item">
+            <i class="fa fa-plus"></i>
+                <span>Add</span>
+                    </a>
+
+
+<style>
+
+body{
+        background: url(https://images.alphacoders.com/102/thumb-1920-1026345.jpg);
+
+    }
+
+.top-header {
+  text-align: center;
+  padding: 10px;
+  background-color: #000000;
+  border-bottom: 1px solid #ffffff;
+}
+
+.top-header h1 {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-align: left;
+  border: #000000;
+  bottom: 25px;
+}
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000000;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.menu-item {
+  text-align: center;
+  flex: 1;
+  text-decoration: none;
+  color: #888;
+}
+
+.menu-item:hover {
+  color: #333;
+}
+
+.menu-item i {
+  font-size: 20px;
+}
+
+.menu-item span {
+  display: block;
+  font-size: 12px;
+}
+
+.user_profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+  }
+  
+  .user_profile img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      margin-right: 10px;
+  }
+
+  .heart {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  cursor: pointer;
+}
+
+.heart.clicked {
+  background-color: red;
+}
+
+/* Иконка сердечка */
+.heart::after {
+  content: "\2661"; /* Юникод для символа сердечка */
+  font-size: 30px;
+}
+
+</style>

@@ -1,0 +1,152 @@
+{% block content %}
+<div class="comments-section">
+    <h2>{{ content_object.comment }}</h2>
+    <p>{{ content_object.description }}</p>
+
+    <!-- Ваш код для отображения контента -->
+
+    <h3>Comments:</h3>
+    <ul class="comments-list">
+        {% for comment in comments %}
+        <li class="comment">
+            {% if comment.user_profile.profile_image %}
+            <img src="{{ comment.user_profile.profile_image.url }}" alt="Profile Image">
+            {% else %}
+            <img src="https://cobaltsettlements.com/wp-content/uploads/2019/03/blank-profile.jpg" alt="Profile Image">
+            {% endif %}
+            <div class="comment-details">
+                <span class="comment-username">{{ comment.user }}</span>
+                {% if comment.user_profile.meta_active.metas %}
+                <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_600,h_600/https://goodenergyworldwide.com/wp-content/uploads/2022/03/blue-01.png" width="10" alt="">
+                {% endif %}
+                <span class="comment-text">{{ comment.comment }}</span>
+                <span class="comment-like-count">{{ comment.like.count }}</span>
+                <form class="like-form" action="{% url 'comment_like' comment.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="like-button">Like</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Форма для добавления нового комментария -->
+<form method="post" class="comment-form">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Add Comment</button>
+</form>
+
+<style>
+    body {
+        background-color: lightcyan;
+        font-family: Arial, sans-serif;
+    }
+
+    .comments-section {
+        margin-top: 20px;
+    }
+
+    .comments-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .comment {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+
+    .comment img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .comment-details {
+        flex: 1;
+    }
+
+    .comment-username {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .comment-text {
+        margin-top: 5px;
+    }
+
+    .comment-like-count {
+        color: #888;
+        margin-left: 10px;
+    }
+
+    .like-form {
+        display: inline;
+    }
+
+    .like-form button {
+        background-color: transparent;
+        border: none;
+        color: #888;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .like-form button:hover {
+        color: #333;
+    }
+
+    .like-button {
+        background-color: transparent;
+        border: none;
+        color: #888;
+        cursor: pointer;
+    }
+
+    .like-button:hover {
+        color: #333;
+    }
+
+    .comment-form {
+        margin-top: 20px;
+    }
+
+    .comment-form button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .comment-form button:hover {
+        background-color: #0056b3;
+    }
+
+    .comment-form textarea {
+        width: 100%;
+        padding: 5px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .like-button {
+    background-color: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+}
+
+.like-button:hover {
+    color: #333;
+}
+
+
+
+</style>
+{% endblock %}
